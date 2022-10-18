@@ -23,35 +23,15 @@
 """
 
 
-# 다시 풀어 봐야 한다.
-
-
 N = int(input()) # 식량창고의 개수
 K = list(map(int, input().split(' '))) # 식량창고에 저장된 식량의 개수
 
-max_feed = 0 # 개미 전사가 얻을 수 있는 식량의 최댓값
-max_feed1 = 0 # 최댓값 비교를 위한 변수 1
-max_feed2 = 0 # 최댓값 비교를 위한 변수 2
+max_feed = [0] * 100 # 식량창고의 개수에 따라 얻을 수 있는 식량의 최댓값을 저장할 리스트 # N이 100 개까지 주어지므로 100으로 초기화
 
-# select : 최대로 약탈할 수 있는 식량창고 개수
-if (N % 2 == 0) :
-  select = N / 2
-  
-  for i in range(0, N, 2):
-    max_feed1 += K[i]
+max_feed[0] = K[0]
+max_feed[1] = max(K[0], K[1])
 
-  for i in range(1, N, 2):
-    max_feed2 += K[i]
+for i in range(2, N):
+  max_feed[i] = max(max_feed[i - 1], max_feed[i - 2] + K[i]) # 점화식
 
-  if (max_feed1 >= max_feed2) :
-    max_feed = max_feed1
-  else :
-    max_feed = max_feed2
-  
-else :
-  select = int(N / 2) + 1
-  
-  for i in range(0, N, 2):
-    max_feed += K[i]
-
-print(max_feed)
+print(max_feed[N - 1])

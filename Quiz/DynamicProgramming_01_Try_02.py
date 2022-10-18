@@ -30,28 +30,38 @@ N = int(input()) # 식량창고의 개수
 K = list(map(int, input().split(' '))) # 식량창고에 저장된 식량의 개수
 
 max_feed = 0 # 개미 전사가 얻을 수 있는 식량의 최댓값
-max_feed1 = 0 # 최댓값 비교를 위한 변수 1
-max_feed2 = 0 # 최댓값 비교를 위한 변수 2
+even_max_feed = 0 # 개미 전사가 최대로 약탈할 수 있는 식량창고 개수가 짝수인 식량의 최댓값
+odd_max_feed = 0 # 개미 전사가 최대로 약탈할 수 있는 식량창고 개수가 홀수인 식량의 최댓값
+even_max_feed1 = 0 # 최댓값 비교를 위한 변수 1
+even_max_feed2 = 0 # 최댓값 비교를 위한 변수 2
 
 # select : 최대로 약탈할 수 있는 식량창고 개수
 if (N % 2 == 0) :
   select = N / 2
-  
-  for i in range(0, N, 2):
-    max_feed1 += K[i]
-
-  for i in range(1, N, 2):
-    max_feed2 += K[i]
-
-  if (max_feed1 >= max_feed2) :
-    max_feed = max_feed1
-  else :
-    max_feed = max_feed2
-  
+    
 else :
   select = int(N / 2) + 1
-  
-  for i in range(0, N, 2):
-    max_feed += K[i]
+
+
+for i in range(0, N, 2):
+  even_max_feed1 += K[i]
+
+for i in range(1, N, 2):
+  even_max_feed2 += K[i]
+
+if (even_max_feed1 >= even_max_feed2) :
+  even_max_feed = even_max_feed1
+else :
+  even_max_feed = even_max_feed2
+
+
+for i in range(0, N, 2):
+    odd_max_feed += K[i]
+
+
+if (even_max_feed >= odd_max_feed) :
+  max_feed = even_max_feed  
+else :
+  max_feed = odd_max_feed
 
 print(max_feed)
