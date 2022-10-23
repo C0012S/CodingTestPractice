@@ -43,7 +43,7 @@ for t in range(T):
   for c in range(1, m):
     for r in range(n):
       if r == 0: # 왼쪽 위가 존재하지 않는 경우
-        leftUp = 0 # 인덱스를 설정할 경우 max_gold[0][c - 1]을 가져오게 되므로 값이 달라질 수 있음
+        leftUp = 0 # 인덱스로 설정할 경우 max_gold[0][c - 1]을 가져오게 되므로 값이 달라질 수 있음
       else:
         leftUp = max_gold[r - 1][c - 1]
 
